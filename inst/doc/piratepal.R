@@ -24,16 +24,17 @@ piratepal(palette = "evildead",
           plot.result = T)
 
 ## ---- fig.width = 6, fig.height = 6, fig.align = 'center'----------------
-nemo.cols <- piratepal(palette = "nemo",  
-                     trans = .2)
+xmen.cols <- piratepal(palette = "xmen",  
+                     trans = .5)
 
 x <- rnorm(100)
 y <- x + rnorm(100)
 
-plot(x = x, y = y, col =  nemo.cols,
+plot(x = x, y = y, 
+     col =  xmen.cols,
      pch = 16,
-     cex = runif(100, min = 0, max = 4),
-     main = "piratepal('nemo', trans = .5)")
+     cex = 2,
+     main = "piratepal('xmen', trans = .5)")
 
 ## ---- fig.width = 8, fig.height = 6, fig.align='center', results='hold'----
 # Set up balloons

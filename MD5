@@ -1,5 +1,6 @@
-fb2dc908d9ba02af9c2312ad6d03ce57 *DESCRIPTION
-605f96bf5de881adb64e7628bf7711b0 *NAMESPACE
+9d088cae4dce12d8b6d16b37df334d3c *DESCRIPTION
+d0b60be48a49e0c01b620e0bafc091dd *NAMESPACE
+7d1c82d2b4a9a2a0c7f29771893ba5a5 *NEWS.md
 f85925229d824a9c019b37f5ba2923af *R/BeardLengths_doc.R
 f99ebafefda4aa71f09e3892b10858ce *R/apa_function.R
 a4308bc1c9bacdda10b500d3b84337c8 *R/auction_doc.R
@@ -11,7 +12,7 @@ b834b97c41facbfb316a8fa1cb3b8b9c *R/hdi_function.R
 adf2d6bda4325d665e3c9c92ec3b37d1 *R/helper_fun.R
 b987990573cbefd2bb390d42daf32512 *R/movies_doc.R
 2c6147a417f3a54cd6a02ca5b9622637 *R/piratepal_function.R
-eccbca0148a497c3feddefcd4f63858d *R/pirateplot_function.R
+2eb988222c7def50b135788c9158ff14 *R/pirateplot_function.R
 d21d0da1bac8d4f3f91f567a0a9c9795 *R/pirates_doc.R
 68d6f0b8d9e3f122a1600a2d7613d3c5 *R/pirateserrors_doc.R
 cc4272fbbc3eaf7ba27b0c4ea5573d33 *R/pircharter_doc.R
@@ -19,8 +20,8 @@ cc4272fbbc3eaf7ba27b0c4ea5573d33 *R/pircharter_doc.R
 752d26b0743c4cc38b8635c849fa7afc *R/recodev_function.R
 ea04b7370ab774e71f17f99c0d9c309f *R/transparent_function.R
 829dc006d42b89901fb8d2dea6a47ae6 *R/zzz.R
-bb2d07fd6f4b0b45d04b9779231af148 *README.md
-dae16bc90f3098827dafd8fdd56ece9f *build/vignette.rds
+654e04e839ef4034fb50afb08668dbad *README.md
+ca2253201ea85c3e841ab51e2ffd86f1 *build/vignette.rds
 0290dacf3847105dbce5446d1b402bf9 *data/BeardLengths.RData
 413523170d15479d5e41e7d346c36d37 *data/auction.RData
 e90352fb5f287aabf946e0ab88e21ce4 *data/capture.RData
@@ -40,13 +41,13 @@ d678e52cec13bd6f443047de012e63bd *inst/bug.jpg
 a94a8133e3adf09567ed626f9d9f88d4 *inst/compote.jpg
 c41ae109e2959004062a7f847bc37c79 *inst/doc/guide.R
 81ebe2bcec1b7e6e4b25b64d2c482b55 *inst/doc/guide.Rmd
-9f396fc605b0857803056faacce6632a *inst/doc/guide.html
-10d15eee7544de6267e9e75d1c6f8727 *inst/doc/piratepal.R
-4450e0f855e81574f766bb641e04898e *inst/doc/piratepal.Rmd
-9c29241203ad191cb6e2c46873f3393c *inst/doc/piratepal.html
-c175eaac44d80abacba2c744aa09ccda *inst/doc/pirateplot.R
-63a43bb37927f1f3af1eb2909168e347 *inst/doc/pirateplot.Rmd
-70abe017e460b203b2a3cd12fb98f292 *inst/doc/pirateplot.html
+7ab7d2841f807ebb1457e9365ab32cca *inst/doc/guide.html
+8690fe750f12e019d4908c4db7337c03 *inst/doc/piratepal.R
+fd84a2777b6e149a9a873adbc86200cd *inst/doc/piratepal.Rmd
+0ecaedd1936e150c2369e2e9e5f1d1cb *inst/doc/piratepal.html
+d146d064de5ed0b2d890d2bed9a53f46 *inst/doc/pirateplot.R
+650a4d8c6fb4528cd158cf0bbabed0aa *inst/doc/pirateplot.Rmd
+e7b466f49255a394bfdc3e2117c08426 *inst/doc/pirateplot.html
 24c344d003c6d9e17c2e48bf24706803 *inst/eternal.jpg
 e09b3e98e9cb669ed9f6b3c9964f2322 *inst/evildead.jpg
 08337e821ded3633b13b361c1cfa5fce *inst/fall.jpg
@@ -76,7 +77,7 @@ e71c819c9900351c69ca6e3090cc3772 *man/diamonds.Rd
 dbe494bb8ccc2ffd110f26138c5fbb83 *man/examscores.Rd
 7581e4078244b441cf90dadc5d34c672 *man/movies.Rd
 45c5d23a1e71e50b28d81a34b3f8d5e7 *man/piratepal.Rd
-98a173b24edf10e092200a23456b013d *man/pirateplot.Rd
+7d7f32373396e976b671cca433471d34 *man/pirateplot.Rd
 5e6ea533d84e56709c1f5158f55e7eff *man/pirates.Rd
 083947e7dc6b404e934d64e21f22b93b *man/pirateserrors.Rd
 6bc3b3dc2be600e5cb828295eba8f872 *man/pircharter.Rd
@@ -86,6 +87,6 @@ dbe494bb8ccc2ffd110f26138c5fbb83 *man/examscores.Rd
 21838591a7de323e14a523ff596b57af *man/yarrr.guide.Rd
 841b662c5767d21c97765419cfd0da74 *vignettes/apa.csl
 81ebe2bcec1b7e6e4b25b64d2c482b55 *vignettes/guide.Rmd
-4450e0f855e81574f766bb641e04898e *vignettes/piratepal.Rmd
-63a43bb37927f1f3af1eb2909168e347 *vignettes/pirateplot.Rmd
+fd84a2777b6e149a9a873adbc86200cd *vignettes/piratepal.Rmd
+650a4d8c6fb4528cd158cf0bbabed0aa *vignettes/pirateplot.Rmd
 deebf07e01d00b515853641bb3137c1a *vignettes/yarrr.bib
