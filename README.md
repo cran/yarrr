@@ -7,12 +7,21 @@ yarrr
 
 YaRrr Package
 
-The `yarrr` package contains a mixture of data, functions and tutorials supporting the e-book YaRrr! The Pirate's Guide to R (www.thepiratesguidetor.com).
+The `yarrr` package contains a mixture of data, functions and tutorials supporting the e-book "YaRrr! The Pirate's Guide to R" (www.thepiratesguidetor.com).
 
 To install the (stable) version from CRAN, run the following code
 
 ``` r
 install.packages("yarrr") # install yarrr
+library("yarrr") # load yarrr
+yarrr.guide() # run main package guide
+```
+
+To install the latest developer version from CRAN, run the following code
+
+``` r
+install.packages("devtools") # install yarrr
+devtools::install_github("ndphillips/yarrr", build_vignettes = TRUE)
 library("yarrr") # load yarrr
 yarrr.guide() # run main package guide
 ```
@@ -26,12 +35,4 @@ pirateplot()
 
 The `pirateplot` function creates a pirateplot, a transparent (both literally and figuratively) plot for displaying continuous data as a function of 1, 2, or 3 discrete variables. Unlike traditional plots, like barplots and boxplots, the pirateplot shows both raw data (jittered points), descriptive statistics (line and/or bar), and inferential statistics (95% Bayesian Highest Density Intervals or Confidence Intervals), in one plot. While the default plot shows all these elements, the user can easily customize the transparency of each element using additional arguments.
 
-For example, here is a pirateplot of the weight of chickens (from the `ChickWeight` dataset)
-
-``` r
-yarrr::pirateplot(formula = weight ~ Time, data = ChickWeight)
-```
-
-![ChickenWeight pirateplot](http://nathanieldphillips.com/wp-content/uploads/2016/08/chickenplot.png)
-
-See <http://rpubs.com/yarrr/pirateplot> for details.
+See `?pirateplot` or <https://cran.r-project.org/web/packages/yarrr/vignettes/pirateplot.html> for more details

@@ -4,18 +4,18 @@
 \alias{pirateplot}
 \title{pirateplot}
 \usage{
-pirateplot(formula = NULL, data = NULL, avg.line.fun = mean,
-  pal = "basel", back.col = gray(1), point.cex = NULL, point.pch = 16,
-  point.lwd = 1, jitter.val = 0.03, theme = 1, bean.b.o = NULL,
-  bean.f.o = NULL, point.o = NULL, bar.f.o = NULL, bar.b.o = NULL,
-  inf.f.o = NULL, inf.b.o = NULL, avg.line.o = NULL, gl.col = NULL,
-  point.col = NULL, point.bg = NULL, bar.f.col = NULL,
+pirateplot(formula = NULL, data = NULL, plot = TRUE,
+  avg.line.fun = mean, pal = "basel", back.col = NULL, point.cex = NULL,
+  point.pch = NULL, point.lwd = 1, jitter.val = 0.03, theme = 1,
+  bean.b.o = NULL, bean.f.o = NULL, point.o = NULL, bar.f.o = NULL,
+  bar.b.o = NULL, inf.f.o = NULL, inf.b.o = NULL, avg.line.o = NULL,
+  gl.col = NULL, point.col = NULL, point.bg = NULL, bar.f.col = NULL,
   bean.b.col = NULL, bean.f.col = NULL, inf.f.col = NULL,
   inf.b.col = NULL, avg.line.col = NULL, bar.b.col = NULL,
   quant.col = NULL, avg.line.lwd = 4, bean.lwd = 1, bean.lty = 1,
   inf.lwd = 1, bar.lwd = 1, at = NULL, bw = "nrd0", adjust = 1,
-  add = FALSE, sortx = "alphabetical", cex.lab = NULL, cex.axis = 1,
-  quant = NULL, quant.length = NULL, quant.lwd = NULL, bty = "n",
+  add = FALSE, sortx = "alphabetical", cex.lab = 1, cex.axis = 1,
+  quant = NULL, quant.length = NULL, quant.lwd = NULL, bty = "o",
   evidence = FALSE, family = NULL, inf = "hdi", inf.p = 0.95,
   hdi.iter = 1000, inf.band = "wide", cut.min = NULL, cut.max = NULL,
   width.min = 0.3, width.max = NA, ylim = NULL, xlim = NULL,
@@ -27,6 +27,8 @@ pirateplot(formula = NULL, data = NULL, avg.line.fun = mean,
 \item{formula}{formula. A formula in the form \code{y ~ x1 + x2 + x3} indicating the vertical response variable (y) and up to three independent varaibles}
 
 \item{data}{dataframe. A dataframe containing the variables specified in formula.}
+
+\item{plot}{logical. If \code{TRUE} (the default), thent the pirateplot is produced. If \code{FALSE}, the data summaries created in the plot are returned as a list.}
 
 \item{avg.line.fun}{function. A function that determines how average lines and bar heights are determined (default is mean).}
 
@@ -85,7 +87,7 @@ pirateplot(formula = NULL, data = NULL, avg.line.fun = mean,
 \item{...}{other arguments passed on to the plot function (e.g.; main, xlab, ylab, ylim, cex.axis, cex.main, cex.lab)}
 }
 \description{
-The pirateplot function creates an RDI (Raw data, Descriptive and Inferential statistic) plot showing the relationship between 1 - 3 categorical independent variables and 1 continuous dependent variable. The plot shows all raw data (shown as points), smoothed densities (shown as beans), and inferential statistics such as 95% Bayesian Highest Density Intervals (shown as bands).
+The pirateplot function creates an RDI (Raw data, Descriptive and Inferential statistic) plot showing the relationship between 1 to 3 categorical independent variables and 1 continuous dependent variable.
 }
 \examples{
 
@@ -94,19 +96,17 @@ The pirateplot function creates an RDI (Raw data, Descriptive and Inferential st
 pirateplot(formula = weight ~ Time,
           data = ChickWeight)
 
-# Black and white version
+# Same but in grayscale
 pirateplot(formula = weight ~ Time,
           data = ChickWeight,
-          main = "Chicken weights by Time",
-          pal = gray(.2)) # Dark gray palette
+          pal = "gray")
+
 
 # Now using theme 2
 pirateplot(formula = weight ~ Time,
           data = ChickWeight,
           main = "Chicken weight by time",
-          theme = 2, # Turn off all elements
-          gl.col = "gray") # gray gridlines
-
+          theme = 2) # theme 2
 
 # Start with theme 2, but then customise!
 pirateplot(formula = weight ~ Time,
@@ -123,10 +123,9 @@ pirateplot(formula = weight ~ Time,
           gl.col = "gray", # gridlines
           gl.lwd = c(.5, 0)) # turn off minor grid lines
 
-# Theme 2 with 2 IVs
+# 2 IVs
 pirateplot(formula = len ~ dose + supp,
           data = ToothGrowth,
-          theme = 2,
           main = "Guinea pig tooth length by supplement",
           point.pch = 16,  # Point specifications...
           point.col = "black",
