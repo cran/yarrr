@@ -71,6 +71,13 @@ pirateplot(formula = weight ~ Time,
            main = "theme = 3")
 
 ## ----fig.align='center', fig.width = 6, fig.height = 4-------------------
+# Theme 4
+pirateplot(formula = weight ~ Time,
+           data = ChickWeight,
+           theme = 4,
+           main = "theme = 4")
+
+## ----fig.align='center', fig.width = 6, fig.height = 4-------------------
 # Default theme
 pirateplot(formula = weight ~ Time,
            data = ChickWeight,
@@ -154,15 +161,15 @@ pirateplot(formula = weight ~ Time,
            bar.f.o = .7) # Just turn on the bars
 
 ## ---- echo = FALSE-------------------------------------------------------
-pp.elements <- data.frame('element' = c("Background color", "Gridlines", "Quantiles", "Average line"),
+pp.elements <- data.frame('element' = c("Background color", "Gridlines", "Quantiles", "Average line", "Inference Calculation", "Inference Display"),
                           'arguments' = c("back.col", 
                                       "gl.col, gl.lwd, gl.lty",
-                                      "quant, quant.lwd, quant.col", "avg.line.fun"
+                                      "quant, quant.lwd, quant.col", "avg.line.fun", "inf.method", "inf.disp"
                                       ),
                           "examples" = c("back.col = 'gray(.9, .9)'", 
                                         "gl.col = 'gray', gl.lwd = c(.75, 0), gl.lty = 1", 
                                         "quant = c(.1, .9), quant.lwd = 1, quant.col = 'black'",
-                                        "avg.line.fun = median")
+                                        "avg.line.fun = median", "inf.method = 'hdi', inf.method = 'ci'", "inf.disp = 'line', inf.disp = 'bean', inf.disp = 'rect'")
                           )
 
 knitr::kable(pp.elements, caption = "Additonal pirateplot elements")
@@ -176,6 +183,7 @@ pirateplot(formula = weight ~ Time,
            gl.col = "gray", # Gray gridlines
            gl.lwd = c(.75, 0),
            inf.f.o = .6, # Turn up inf filling
+           inf.disp = "bean", # Wrap inference around bean
            bean.b.o = .4, # Turn down bean borders
            quant = c(.1, .9), # 10th and 90th quantiles
            quant.col = "black" # Black quantile lines
@@ -185,21 +193,24 @@ pirateplot(formula = weight ~ Time,
 pirateplot(formula = height ~ sex + eyepatch + headband,
            data = pirates,
            theme = 2,
-           main = "Pirate Heights")
+           inf.disp = "bean")
 
-## ----fig.width = 7, fig.height = 4, fig.align = "center"-----------------
+## ----fig.width = 8, fig.height = 8, fig.align = "center"-----------------
 pirateplot(formula = time ~ sequel + genre + rating,
            data = subset(movies, 
                          genre %in% c("Action", "Adventure", "Comedy", "Horror") &
+                         rating %in% c("G", "PG", "PG-13", "R") &
                          time > 0),
-           main = "Movie running times",
            theme = 3,
+           cex.lab = .8,
+           inf.disp = "rect",
            pal = "up")
 
-## ------------------------------------------------------------------------
+## ----fig.width = 10, fig.height = 7, fig.align = "center"----------------
 times.pp <- pirateplot(formula = time ~ sequel + genre,
                        data = subset(movies, 
                          genre %in% c("Action", "Adventure", "Comedy", "Horror") &
+                         rating %in% c("G", "PG", "PG-13", "R") &
                          time > 0),
                          plot = FALSE)
 

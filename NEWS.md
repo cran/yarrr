@@ -1,3 +1,11 @@
+# yarrr 0.1.4
+
+* Some minor changes to default plotting parameters that I think make the default plots look a bit nicer.
+
+* Added `cap.beans` argument to `pirateplot()`. When `cap.beans = TRUE`, beans will be cut at the maximum and minimum values of the data.
+
+* Added two new `inf.method` values: `sd` for standard deviation, and `se` for standard error
+
 # yarrr 0.1.2
 
 * Minor updates to themes. Added `theme = 3`
@@ -25,8 +33,7 @@ Levels of the third IV are shown in separate plots in a grid.
 
 Minor and Bug-fixes
 
-- The `inf.p` parameter in `pirateplot()` was prevously not being passed to the Bayesian HDIs, rendering all inference bands to be the default of 95% (thanks to Roman Pahl for catching this). 
-This has now been fixed.
+- The `inf.p` parameter in `pirateplot()` was prevously not being passed to the Bayesian HDIs, rendering all inference bands to be the default of 95% (thanks to Roman Pahl for catching this). This has now been fixed.
 
 # yarrr 0.0.6
 
