@@ -5,37 +5,42 @@
 \title{pirateplot}
 \usage{
 pirateplot(formula = NULL, data = NULL, plot = TRUE,
-  avg.line.fun = mean, pal = "basel", back.col = NULL, point.cex = NULL,
-  point.pch = NULL, point.lwd = 1, jitter.val = 0.03, theme = 1,
-  bean.b.o = NULL, bean.f.o = NULL, point.o = NULL, bar.f.o = NULL,
-  bar.b.o = NULL, inf.f.o = NULL, inf.b.o = NULL, avg.line.o = NULL,
-  gl.col = NULL, point.col = NULL, point.bg = NULL, bar.f.col = NULL,
-  bean.b.col = NULL, bean.f.col = NULL, inf.f.col = NULL,
-  inf.b.col = NULL, avg.line.col = NULL, bar.b.col = NULL,
-  quant.col = NULL, avg.line.lwd = 4, bean.lwd = 1, bean.lty = 1,
-  inf.lwd = NULL, bar.lwd = 1, at = NULL, bw = "nrd0", adjust = 1,
-  add = FALSE, sortx = "alphabetical", cex.lab = 1, cex.axis = 1,
-  quant = NULL, quant.length = NULL, quant.lwd = NULL,
-  quant.boxplot = FALSE, bty = "o", evidence = FALSE, cap.beans = FALSE,
-  family = NULL, inf.method = "hdi", inf.within = NULL, inf.p = NULL,
-  hdi.iter = 1000, inf.disp = NULL, cut.min = NULL, cut.max = NULL,
-  width.min = 0.3, width.max = NA, ylim = NULL, xlim = NULL,
-  xlab = NULL, ylab = NULL, main = NULL, yaxt = NULL, xaxt = NULL,
-  gl.lwd = NULL, gl.lty = NULL, bar.b.lwd = NULL, line.fun = NULL,
-  line.o = NULL, inf.o = NULL, bean.o = NULL, inf.col = NULL,
-  theme.o = NULL, bar.o = NULL, inf = NULL, hdi.o = NULL,
-  inf.type = NULL, inf.band = NULL)
+  avg.line.fun = mean, pal = "basel", mix.col = "white", mix.p = 0,
+  back.col = NULL, point.cex = NULL, point.pch = NULL, point.lwd = 1,
+  jitter.val = 0.03, theme = 1, bean.b.o = NULL, bean.f.o = NULL,
+  point.o = NULL, bar.f.o = NULL, bar.b.o = NULL, inf.f.o = NULL,
+  inf.b.o = NULL, avg.line.o = NULL, gl.col = NULL, point.col = NULL,
+  point.bg = NULL, bar.f.col = NULL, bean.b.col = NULL,
+  bean.f.col = NULL, inf.f.col = NULL, inf.b.col = NULL,
+  avg.line.col = NULL, bar.b.col = NULL, quant.col = NULL,
+  avg.line.lwd = 4, bean.lwd = 1, bean.lty = 1, inf.lwd = NULL,
+  bar.lwd = 1, at = NULL, bw = "nrd0", adjust = 1, add = FALSE,
+  sortx = "alphabetical", decreasing = FALSE, cex.lab = 1, cex.axis = 1,
+  cex.names = 1, quant = NULL, quant.length = NULL, quant.lwd = NULL,
+  quant.boxplot = FALSE, bty = "o", cap.beans = TRUE, family = NULL,
+  inf.method = "hdi", inf.within = NULL, inf.p = NULL, hdi.iter = 1000,
+  inf.disp = NULL, cut.min = NULL, cut.max = NULL, width.min = 0.3,
+  width.max = NA, ylim = NULL, xlim = NULL, xlab = NULL, ylab = NULL,
+  main = NULL, yaxt = NULL, xaxt = NULL, gl = NULL, gl.lwd = NULL,
+  gl.lty = NULL, bar.b.lwd = NULL, line.fun = NULL, line.o = NULL,
+  inf.o = NULL, bean.o = NULL, inf.col = NULL, theme.o = NULL,
+  bar.o = NULL, inf = NULL, hdi.o = NULL, inf.type = NULL,
+  inf.band = NULL)
 }
 \arguments{
 \item{formula}{formula. A formula in the form \code{y ~ x1 + x2 + x3} indicating the vertical response variable (y) and up to three independent variables}
 
-\item{data}{dataframe. A dataframe containing the variables specified in formula.}
+\item{data}{Either a dataframe containing the variables specified in formula, a list of numeric vectors, or a numeric dataframe / matrix.}
 
 \item{plot}{logical. If \code{TRUE} (the default), thent the pirateplot is produced. If \code{FALSE}, the data summaries created in the plot are returned as a list.}
 
 \item{avg.line.fun}{function. A function that determines how average lines and bar heights are determined (default is mean).}
 
 \item{pal}{string. The color palette of the plot. Can be a single color, a vector of colors, or the name of a palette in the piratepal() function (e.g.; "basel", "google", "southpark"). To see all the palettes, run \code{piratepal(palette = "all", action = "show")}}
+
+\item{mix.col, mix.p}{Optional color mixing arguments to be passed to \code{piratepal}. See \code{?piratepal} for examples.}
+
+\item{back.col}{string. Color of the plotting background.}
 
 \item{point.cex, point.pch, point.lwd}{numeric.  The size, pch type, and line width of raw data points.}
 
@@ -45,8 +50,6 @@ pirateplot(formula = NULL, data = NULL, plot = TRUE,
 
 \item{bar.f.o, point.o, inf.f.o, inf.b.o, avg.line.o, bean.b.o, bean.f.o, bar.b.o}{numeric. A number between 0 and 1 indicating how opaque to make the bars, points, inference band, average line, and beans respectively. These values override whatever is in the specified theme}
 
-\item{gl.col, back.col}{string. The color of the horizontal gridlines and plotting background.}
-
 \item{point.col, bar.f.col, bean.b.col, bean.f.col, inf.f.col, inf.b.col, avg.line.col, bar.b.col, quant.col, point.bg}{string. Vectors of colors specifying the colors of the plotting elements. This will override values in the palette. f stands for filling, b stands for border.}
 
 \item{bean.lwd, bean.lty, inf.lwd, avg.line.lwd, bar.lwd}{numeric. Vectors of numbers customizing the look of beans and lines.}
@@ -55,11 +58,13 @@ pirateplot(formula = NULL, data = NULL, plot = TRUE,
 
 \item{bw, adjust}{Arguments passed to density calculations for beans (see ?density)}
 
-\item{add}{logical. Whether to add the pirateplot to an existing plotting space or not.}
+\item{add}{logical. Should the pirateplot elements be added to an existing plotting space?}
 
-\item{sortx}{string. How to sort the x values. Can be "sequential" (as they are found in the original dataframe), "alphabetical", or a string indicating a function (i.e.; "mean")}
+\item{sortx}{string. How to sort the x values. Can be "sequential" (as they are found in the original dataframe), "alphabetical", or a string in the set ("mean", "median", "min", "max") indicating a function}
 
-\item{cex.lab, cex.axis}{Size of the labels and axes.}
+\item{decreasing}{logical. If sortx is a named function, should values be sorted in decreasing order?}
+
+\item{cex.lab, cex.axis, cex.names}{Size of the labels, axes, and bean names.}
 
 \item{quant}{numeric. Adds horizontal lines representing custom quantiles.}
 
@@ -68,8 +73,6 @@ pirateplot(formula = NULL, data = NULL, plot = TRUE,
 \item{quant.boxplot}{logical. Should standard values be included?}
 
 \item{bty, xlim, ylim, xlab, ylab, main, yaxt, xaxt}{General plotting arguments}
-
-\item{evidence}{logical. Should Bayesian evidence be shown? (currently ignored)}
 
 \item{cap.beans}{logical. Should maximum and minimum values of the bean densities be capped at the limits found in the data? Default is FALSE.}
 
@@ -89,7 +92,9 @@ pirateplot(formula = NULL, data = NULL, plot = TRUE,
 
 \item{width.min, width.max}{numeric. The minimum/maximum width of the beans.}
 
-\item{gl.lwd, gl.lty}{Customization for grid lines.}
+\item{gl}{numeric. Locations of the horizontal grid lines}
+
+\item{gl.lwd, gl.lty, gl.col}{Customization for grid lines. Can be entered as vectors for alternating gridline types}
 
 \item{bar.b.lwd, line.fun, inf.o, bean.o, inf.col, theme.o, inf, inf.type, inf.band, bar.o, line.o, hdi.o}{depricated arguments}
 }
@@ -173,4 +178,3 @@ pirateplot(formula = height ~ headband + eyepatch + sex,
 
 }
 \keyword{plot}
-

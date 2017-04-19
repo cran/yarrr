@@ -5,10 +5,13 @@
 #' @param palette A string defining the color palette to use (see examples). To use a random palette, use "random". To plot all palettes, use "all". To see all palette names, use "names"
 #' @param plot.result A logical value indicating whether or not to display the colors.
 #' @param trans A number in the interval [0, 1] indicating how transparent to make the colors. A value of 0 means no transparency and a value of 1 means completely transparency.
+#' @param mix.col string. An optional string representing a color to mix all colors in the palette with.
+#' @param mix.p numeric. A number in the interval [0, 1] indicating how much to mix the palette colors with the color in \code{mix.col}
 #' @param length.out An integer indicating how many colors to return. If length.out is larger than the number of colors in the palette, colors will be repeated.
 #' @keywords colors
 #' @export
 #' @importFrom jpeg readJPEG
+#' @importFrom circlize colorRamp2
 #' @examples
 #'
 #'
@@ -42,6 +45,8 @@
 
 piratepal <- function(palette = "all",
                       trans = 0,
+                      mix.col = "white",
+                      mix.p = 0,
                       plot.result = FALSE,
                       length.out = NULL) {
 
@@ -89,6 +94,16 @@ if(trans < 0 | trans > 1) {stop("Problem: trans must be a number between 0 and 1
         "yellow" = rgb(238, 194, 41, alpha = (1 - trans) * 255, maxColorValue = 255),
         stringsAsFactors = F),
 
+      "decision.pal" = data.frame(
+        "red" = rgb(213, 122, 109, alpha = (1 - trans) * 255, maxColorValue = 255),
+        "yellow" = rgb(232, 183, 98, alpha = (1 - trans) * 255, maxColorValue = 255),
+        "blue" = rgb(156, 205, 223, alpha = (1 - trans) * 255, maxColorValue = 255),
+        "gray" = rgb(82, 80, 82, alpha = (1 - trans) * 255, maxColorValue = 255),
+        "tan" = rgb(230, 206, 175, alpha = (1- trans) * 255, maxColorValue = 255),
+        "brown" = rgb(186, 149, 112, alpha = (1- trans) * 255, maxColorValue = 255),
+        stringsAsFactors = F),
+
+
       "southpark.pal" = data.frame(
         "blue" = rgb(47, 134, 255, alpha = (1 - trans) * 255, maxColorValue = 255),
         "yellow" = rgb(235, 171, 22, alpha = (1- trans) * 255, maxColorValue = 255),
@@ -129,35 +144,6 @@ if(trans < 0 | trans > 1) {stop("Problem: trans must be a number between 0 and 1
         "tan" = rgb(150, 142, 76, alpha = (1 - trans) * 255, maxColorValue = 255),
         stringsAsFactors = F),
 
-      # "monalisa.pal" = data.frame(
-      #   "tan" = rgb(187, 163, 112, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "yellow" = rgb(202, 162, 65, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "green1" = rgb(187, 190, 112, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "green2" = rgb(89, 89, 41, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "brown" = rgb(42, 20, 1, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   stringsAsFactors = F),
-
-      # malcovich.pal =data.frame(
-      #   "gray1" = rgb(5, 5, 5, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue1" = rgb(20, 24, 27, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "green" = rgb(46, 77, 73, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "brown" = rgb(77, 64, 57, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue2" = rgb(48, 92, 110, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue3" = rgb(117, 125, 139, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "gray" = rgb(164, 160, 159, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #
-      #   stringsAsFactors = F),
-
-      # toystory.pal =data.frame(
-      #   "gray1" = rgb(15, 10, 10, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue1" = rgb(36, 24, 40, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "red" = rgb(251, 27, 34, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "brown" = rgb(94, 72, 57, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "green" = rgb(125, 153, 58, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "yellow" = rgb(227, 191, 71, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue2" = rgb(167, 208, 235, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #
-      #   stringsAsFactors = F),
 
       usualsuspects.pal =data.frame(
         "gray1" = rgb(50, 51, 55, alpha = (1 - trans) * 255, maxColorValue = 255),
@@ -258,11 +244,9 @@ if(trans < 0 | trans > 1) {stop("Problem: trans must be a number between 0 and 1
         stringsAsFactors = F),
 
 
-
       # Taken from a cellphone photo of espresso cups in the ARC kitchen
 
       espresso.pal=data.frame(
-        "purple" = rgb(39, 27, 48, alpha = (1 - trans) * 255, maxColorValue = 255),
         "blue" = rgb(35, 102, 192, alpha = (1 - trans) * 255, maxColorValue = 255),
         "yellow" = rgb(233, 215, 56, alpha = (1 - trans) * 255, maxColorValue = 255),
         "red" = rgb(185, 18, 38, alpha = (1 - trans) * 255, maxColorValue = 255),
@@ -317,108 +301,51 @@ if(trans < 0 | trans > 1) {stop("Problem: trans must be a number between 0 and 1
 
 
 
-
-
-      # http://www.informationisbeautiful.net/visualizations/drugs-world/
-
-      # drugs.pal =data.frame(
-      #   "blue" = rgb(170, 220, 226, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "green" = rgb(162, 206, 37, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "yellow" = rgb(244, 238, 43, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "orange" = rgb(207, 79, 26, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "purple" = rgb(217, 82, 156, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "gray" = rgb(225, 224, 224, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   stringsAsFactors = F),
-
-
-
-
-      # http://www.colourlovers.com/palette/92095/Giant_Goldfish
-
-      # goldfish.pal =data.frame(
-      #   "blue" = rgb(105, 210, 231, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "green" = rgb(167, 219, 216, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "gray" = rgb(224, 228, 204, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "orange1" = rgb(243, 134, 48, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "orange2" = rgb(250, 105, 0, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   stringsAsFactors = F),
-
-
-      # http://www.colourlovers.com/palette/694737/Thought_Provoking
-
-      # provoking.pal =data.frame(
-      #   "yellow" = rgb(236, 208, 120, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "orange" = rgb(217, 91, 67, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "red" = rgb(192, 41, 66, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "brown" = rgb(84, 36, 55, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue" = rgb(83, 119, 122, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   stringsAsFactors = F),
-
-
-      # http://www.colourlovers.com/palette/1930/cheer_up_emo_kid
-#
-#       emo.pal =data.frame(
-#         "grayblue" = rgb(85, 98, 112, alpha = (1 - trans) * 255, maxColorValue = 255),
-#         "blue" = rgb(78, 205, 196, alpha = (1 - trans) * 255, maxColorValue = 255),
-#         "green" = rgb(199, 244, 100, alpha = (1 - trans) * 255, maxColorValue = 255),
-#         "salmon" = rgb(255, 107, 107, alpha = (1 - trans) * 255, maxColorValue = 255),
-#         "magenta" = rgb(196, 77, 88, alpha = (1 - trans) * 255, maxColorValue = 255),
-#         stringsAsFactors = F),
-
-
-
-      # http://www.colourlovers.com/palette/49963/let_them_eat_cake
-
-      # cake.pal =data.frame(
-      #   "brown" = rgb(119, 79, 56, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "red" = rgb(224, 142, 121, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "creme1" = rgb(241, 212, 175, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "creme2" = rgb(236, 229, 206, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue" = rgb(197, 224, 220, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   stringsAsFactors = F),
-      #
-
-
-      # http://www.colourlovers.com/palette/443995/i_demand_a_pancake
-
-      # pancake.pal=data.frame(
-      #   "brown" = rgb(89, 79, 79, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue1" = rgb(84, 121, 128, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "blue2" = rgb(69, 173, 168, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "green" = rgb(157, 224, 173, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "yellow" = rgb(229, 252, 194, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   stringsAsFactors = F),
-
-
-
-      #   http://www.colourlovers.com/fashion/trends/street-fashion/7759/LUBITEL
-
-      # lubitel.pal =data.frame(
-      #   "blue" = rgb(55, 58, 69, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "gray" = rgb(194, 194, 194, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "brown1" = rgb(179, 152, 109, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "red" = rgb(120, 36, 29, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   "brown2" = rgb(94, 62, 53, alpha = (1 - trans) * 255, maxColorValue = 255),
-      #   stringsAsFactors = F)
-
-
     )
 
 
   }
 
-palette.names <- unlist(strsplit(names(piratepal.ls), ".pal", T))
+
+palette.names <- unlist(strsplit(names(piratepal.ls), ".pal", TRUE))
 n.palettes <- length(palette.names)
 
 if(!(palette %in% c(palette.names, "random", "all", "names"))) {
 
-  stop(c("You did not specify a valid palette. Please try one of the following: ", palette.names))
+  stop(c("You did not specify a valid palette. Run piratepal('names') to see all of the palette names."))
 
 }
+
+# Save original margins
+
+margin.o <- par("mar")
 
 
 # if palette == "all", show all palettes
 if(palette == "all") {
+
+  # Mix palete with mix.col
+
+  if(mix.p > 0) {
+
+    for (pal.i in 1:length(piratepal.ls)) {
+
+      for(col.i in 1:length(piratepal.ls[[pal.i]])) {
+
+        # Create a color mix funciton using colorRamp2
+
+        pal.fun <- circlize::colorRamp2(c(0, 1),
+                                        colors = c(piratepal.ls[[pal.i]][col.i], mix.col),
+                                        transparency = trans)
+
+        # Assign color to palette list
+        piratepal.ls[[pal.i]][col.i] <- pal.fun(mix.p)
+
+      }
+
+    }
+  }
+
 
   output <- NULL
 
@@ -468,7 +395,29 @@ if(palette == "names") {
 }
 
 # Get result vector
-if(palette %in% c("all", "random", "names") == F) {
+if(palette %in% c("all", "random", "names") == FALSE) {
+
+# Mix palete with mix.col
+
+if(mix.p > 0) {
+
+  for (pal.i in which(palette == palette.names)) {
+
+    for(col.i in 1:length(piratepal.ls[[pal.i]])) {
+
+      # Create a color mix funciton using colorRamp2
+
+      pal.fun <- circlize::colorRamp2(c(0, 1),
+                                      colors = c(piratepal.ls[[pal.i]][col.i], mix.col),
+                                      transparency = trans)
+
+      # Assign color to palette list
+      piratepal.ls[[pal.i]][col.i] <- pal.fun(mix.p)
+
+    }
+
+  }
+}
 
   palette.df <- piratepal.ls[[paste(palette, ".pal", sep = "")]]
 
@@ -481,6 +430,7 @@ if(palette %in% c("all", "random", "names") == F) {
 if(plot.result & palette %in% palette.names) {
 
   palette.df <- piratepal.ls[[paste(palette, ".pal", sep = "")]]
+
   col.vec <- unlist(palette.df)
   n.colors <- length(col.vec)
 
@@ -573,13 +523,14 @@ segments(locations.to.use, text.heights + .05, locations.to.use, point.heights, 
 
   # Reset margins
 
-  par("mar" = c(5, 4, 4, 1) + .1)
-
 }
 
 if(is.null(output) == F & plot.result == F) {
 return(output)
 }
+
+# reset margins
+par("mar" = margin.o)
 
 }
 

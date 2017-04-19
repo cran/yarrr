@@ -1,6 +1,24 @@
+# yarrr 0.1.5
+
+* Minor changes to `theme = 1` in `pirateplot()`. Changed default value of `cap.beans` to `TRUE`
+
+* Added color mixing arguments `mix.col` and `mix.p` to `piratepal()`. These allow you to mix the default palettes with a specified color (e.g.; `"white"`)
+
+* Added the option to specify data in `pirateplot()` as a list of numeric vectors, or as a numeric dataframe or matrix without specifying a formula. Each column / element will be taken as a new group.
+
+* New palettes in `piratepal()`: `decision`.
+
+* Fixed bug in `sortx` in `pirateplot()`. Sorting data by functions (e.g. `sortx = "mean"`) should now work.
+
+* Added `gl` argument to `pirateplot()` to specify locations of gridlines (e.g.; `gl = seq(0, 10, 1)`)
+
+* Added `cex.names` argument to control size of bean names (currently this was controlled by `cex.lab`, which now controls the size of the axis names.)
+
 # yarrr 0.1.4
 
 * Some minor changes to default plotting parameters that I think make the default plots look a bit nicer.
+
+* Added `cap.beans` argument to `pirateplot()`. When `cap.beans = TRUE`, beans will be cut at the maximum and minimum values of the data.
 
 * Added `cap.beans` argument to `pirateplot()`. When `cap.beans = TRUE`, beans will be cut at the maximum and minimum values of the data.
 
